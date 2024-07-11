@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
   font-family: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -50,6 +50,10 @@
   background-image: url('assets/media/ev_car.jpg');
 }
 
+#OurTeamBG {
+  background-image: url('assets/media/team_pic.jpg');
+}
+
 @layer base {
   :root {
     @apply bg-neutral-200;
@@ -66,8 +70,8 @@
   .footer-title {
     @apply text-2xl md:text-4xl;
   }
-  .footer-item {
-    @apply text-base md:text-2xl;
+  .social-item {
+    @apply text-2xl p-4;
   }
   .clickable {
     @apply  p-2 text-3xl bg-blue-900 rounded-md text-white;

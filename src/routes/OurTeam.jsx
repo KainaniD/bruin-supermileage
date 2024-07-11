@@ -1,10 +1,15 @@
 import { React } from 'react'
+import { motion } from 'framer-motion';
 
 const OurTeam = () => {
     return (
         <>
-        <div className="flex flex-col-reverse landing">
-            <h1 className='text-neutral-700 title '>Our Team</h1>
+        <div id="OurTeamBG" className="flex flex-col-reverse p-0 landing bg-center">
+        <motion.h1 
+    initial={{ x: "-100%", opacity: 0}}
+    animate={{ x: 0, opacity: 1}}
+    transition={{ duration: 0.4 }}      
+    className='absolute top-1/3 w-full bg-black bg-opacity-50 text-white title py-2 text-center'>Our Team</motion.h1>
         </div>
         </>
     );

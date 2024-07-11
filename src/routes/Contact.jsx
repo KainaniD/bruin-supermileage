@@ -1,24 +1,71 @@
-import { React } from 'react'
+import axios from 'axios';
+import { React, useState } from 'react'
 
 const Contact = () => {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        const data = {
+            service_id: import.meta.env.VITE_EMAIL_SERVICE_ID,
+            template_id: import.meta.env.VITE_EMAIL_TEMPLATE_ID,
+            user_id: import.meta.env.VITE_EMAIL_PUBLIC_KEY,
+            template_params: {
+                from_name: name,
+                to_name: "Bruin SMV",
+                from_email: email,
+                message: message,
+            }
+        };
+
+        axios.post("https://api.emailjs.com/api/v1.0/email/send", data)
+            .then(result => {
+                console.log(result);
+                setName('');
+                setEmail('');
+                setMessage('');
+            })
+            .catch(error => { console.log(error) })
+    };
+
+
     return (
         <>
             <div className="flex flex-col landing gap-8">
                 <h1 className='text-neutral-700 title'>Contact</h1>
-                <form className='flex flex-col gap-4 w-1/2'>
+                <form onSubmit={sendEmail} className='flex flex-col gap-4 w-full lg:w-1/2'>
                     <div className="flex flex-row gap-4">
                         <div className='flex flex-col w-1/2'>
                             <label className='form-label'>Name</label>
-                            <input className='p-2 rounded-lg' type="text" name="user_name" />
+                            <input
+                                className='p-2 rounded-lg'
+                                type="text"
+                                name="user_name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div className='flex flex-col w-1/2'>
                             <label className='form-label'>Email</label>
-                            <input className='p-2 rounded-lg' type="email" name="user_email" />
+                            <input
+                                className='p-2 rounded-lg'
+                                type="email"
+                                name="user_email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         </div>
                     </div>
                     <div className='flex flex-col'>
                         <label className='form-label'>Subject</label>
-                        <textarea className='p-2 rounded-lg' name="message" />
+                        <textarea
+                            className='p-2 rounded-lg'
+                            name="message"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)} />
                     </div>
                     <button type="submit" className='bg-blue-900 p-2 text-xl rounded-md text-white'>Send</button>
                 </form>
