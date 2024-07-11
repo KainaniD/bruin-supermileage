@@ -1,5 +1,5 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom'
-import App from './App.jsx'
+import Homepage from './routes/Homepage.jsx'
 import Navbar from './components/Navbar.jsx'
 import Contact from './routes/Contact.jsx'
 import Projects from './routes/Projects.jsx'
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
     path: '/',
     element: <AppLayout />,
     children: [
-      { path: '', element: <App /> },
+      { path: '', element: <Homepage /> },
       { path: '/contact', element: <Contact />},
       { path: '/projects', element: <Projects />},
       { path: '/our-team', element: <OurTeam />},
