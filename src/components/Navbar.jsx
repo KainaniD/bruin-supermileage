@@ -70,6 +70,7 @@ const Navbar = () => {
 
 
     return (
+        <>
         <div className="absolute flex flex-row items-start w-full justify-between gap-10 p-5 overflow-hidden bg-white bg-opacity-50">
             <div className="flex flex-row gap-4 items-center">
                 <Link className='text-3xl lg:text-5xl nav-link' to="/"><span className="text-black">Bruin</span><br className={`lg:hidden`}/> <span className="text-amber-400">Supermileage</span></Link>
@@ -77,6 +78,7 @@ const Navbar = () => {
             {desktopNav}
             {mobileNav}
         </div>
+        </>
     );
 }
 
