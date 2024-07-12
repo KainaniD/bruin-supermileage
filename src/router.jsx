@@ -2,9 +2,10 @@ import { createBrowserRouter, Outlet } from 'react-router-dom'
 import Homepage from './routes/Homepage.jsx'
 import Navbar from './components/Navbar.jsx'
 import Contact from './routes/Contact.jsx'
-import Designs from './routes/Designs.jsx'
+import Projects from './routes/Projects.jsx'
 import OurTeam from './routes/OurTeam.jsx'
 import Footer from './components/Footer.jsx'
+import GetInvolved from './routes/GetInvolved.jsx'
 
 const AppLayout = () => {
 
@@ -24,8 +25,9 @@ export const router = createBrowserRouter([
     children: [
       { path: '', element: <Homepage /> },
       { path: '/contact', element: <Contact />},
-      { path: '/designs', element: <Designs />},
+      { path: '/projects', element: <Projects />},
       { path: '/our-team', element: <OurTeam />},
+      { path: '/get-involved', element: <GetInvolved />}
     ]
   }
 ])

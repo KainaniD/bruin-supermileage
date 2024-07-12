@@ -6,9 +6,20 @@ const Contact = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    function handleError(error) {
+        setErrorMessage(error);
+    }
 
     const sendEmail = (e) => {
         e.preventDefault();
+        if (name.length === 0 || email.length === 0 || message.length === 0) {
+            return handleError("Please fill out all fields");
+        }
+        const regexCheck = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (!email.match(regexCheck)) return handleError("Please enter a valid email address");
 
         const data = {
             service_id: import.meta.env.VITE_EMAIL_SERVICE_ID,
@@ -24,12 +35,14 @@ const Contact = () => {
 
         axios.post("https://api.emailjs.com/api/v1.0/email/send", data)
             .then(result => {
-                console.log(result);
                 setName('');
                 setEmail('');
                 setMessage('');
+                setErrorMessage('');
             })
-            .catch(error => { console.log(error) })
+            .catch(() => { 
+                setErrorMessage("oops, something wrong happened :(");
+            })
     };
 
 
@@ -66,6 +79,9 @@ const Contact = () => {
                             name="message"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)} />
+                    </div>
+                    <div id="ErrorMessage" className={`flex flex-row gap-5 text-red-500 ${errorMessage ? '' : 'hidden'}`}>
+                        <p>* {errorMessage}</p>
                     </div>
                     <button type="submit" className='bg-blue-900 p-2 text-xl rounded-md text-white'>Send</button>
                 </form>
